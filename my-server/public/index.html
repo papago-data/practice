@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#ffe0e6">
+  <title>一周年快乐 ❤️</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- 首图预加载：点开相册时第一张照片（images/7.jpg）秒显 -->
+  <link rel="preload" as="image" href="images/7.jpg" fetchpriority="high">
+</head>
+<body>
+
+  <!-- 背景星光特效 -->
+  <div id="stars-container"></div>
+
+  <!-- 场景粒子（落叶/花瓣/雪花/泡泡/萤火虫/星星等真实元素） -->
+  <div id="scene-fx"></div>
+
+  <!-- 极光 -->
+  <div id="aurora"></div>
+
+  <!-- 流星雨 -->
+  <div class="shooting-star s1"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+  <div class="shooting-star s4"></div>
+  <div class="shooting-star s5"></div>
+
+  <!-- 漂浮光尘 -->
+  <div id="dust"></div>
+
+  <!-- 快门爆闪（开场显影用） -->
+  <div id="flash"></div>
+
+  <!-- 系统崩溃倒计时（全屏震慑，完全屏蔽操作） -->
+  <div id="crash-layer" class="hidden">
+    <div class="crash-inner">
+      <p class="crash-warn">⚠ SYSTEM ERROR</p>
+      <p class="crash-title">系统即将关闭</p>
+      <p class="crash-num" id="crash-num">10</p>
+      <div class="crash-bar"><span id="crash-bar"></span></div>
+    </div>
+  </div>
+
+  <!-- 通用弹窗 -->
+  <div id="fx-modal" class="fx-modal hidden">
+    <div class="fx-modal-body" id="fx-modal-body"></div>
+  </div>
+
+  <!-- 孔明灯许愿 -->
+  <div id="lantern-layer" class="hidden">
+    <div class="lantern-moon"></div>
+    <div class="lantern-ui">
+      <p class="lantern-title">许一个愿，点一下天空</p>
+      <p class="lantern-sub">放一盏孔明灯，愿望都会实现</p>
+      <button class="fx-close-btn" data-close="lantern">收回</button>
+    </div>
+  </div>
+
+  <!-- 记忆星空：每颗星都是一段回忆 -->
+  <div id="star-memory" class="hidden">
+    <div class="sm-head">记忆星空 <button class="fx-close-btn" data-close="starmemory">✕</button></div>
+    <div id="star-sky"></div>
+    <div id="star-pop" class="hidden"></div>
+  </div>
+
+  <!-- 恋爱数据大屏 -->
+  <div id="dashboard" class="hidden">
+    <p class="db-title">我们的数字</p>
+    <div id="db-grid"></div>
+    <button class="fx-close-btn" data-close="dashboard">收下</button>
+  </div>
+
+  <!-- 隐藏的音频（voice.mp3 懒加载：用到时才请求，避免首屏 404） -->
+  <audio id="bgm"></audio>
+  <audio id="voice"></audio>
+
+  <!-- BGM 选择器（左下角） -->
+  <div id="music-widget">
+    <button id="music-btn" title="选择音乐">🎵</button>
+    <div id="music-panel" class="hidden">
+      <p class="music-title">选择背景音乐</p>
+      <button class="music-opt active" data-src="bgm1.mp3">歌曲 1</button>
+      <button class="music-opt" data-src="bgm2.mp3">歌曲 2</button>
+      <button class="music-opt" data-src="bgm3.mp3">歌曲 3</button>
+      <button class="music-opt" data-src="bgm4.mp3">歌曲 4</button>
+    </div>
+  </div>
+
+  <!-- 开场：打字机 -->
+  <div id="intro-section" class="section">
+    <h1 id="typewriter"></h1>
+    <button id="start-btn" class="hidden">开启我们的回忆</button>
+  </div>
+
+  <!-- 相册区 -->
+  <div id="main-section" class="section hidden">
+    <div class="image-box" id="polaroid-frame">
+      <div class="img-container" id="stage"></div>
+      <p id="image-caption"></p>
+    </div>
+
+    <div class="nav-controls">
+      <button id="prev-btn" class="nav-btn">‹ 上一张</button>
+      <button id="next-btn" class="nav-btn">下一张 ›</button>
+    </div>
+
+    <!-- 结尾彩蛋 -->
+    <div id="final-words" class="hidden">
+      <h2 class="heartbeat">一周年快乐</h2>
+      <p>有些话，想悄悄对你说</p>
+      <div id="days-counter"></div>
+
+      <!-- 情书彩蛋 -->
+      <div id="letter-trigger" class="hidden">
+        <p class="hint">( 点开这封信 )</p>
+        <button id="open-letter-btn">💌 打开信封</button>
+      </div>
+
+      <!-- 展开的情书 -->
+      <div id="letter-content" class="hidden">
+        <p>亲爱的宝宝：</p>
+        <p>一年了。从遇见你的那天起，我的世界就悄悄变了颜色——原本灰蒙蒙的日子，因为你，忽然有了光。</p>
+        <p>谢谢你，包容我所有的小脾气；谢谢你，陪我吃过每一顿饭、走过每一条街、看过每一次日落；谢谢你，愿意让我走进你的世界，把平凡的日子，过成了诗。</p>
+        <p>这只是第一年。往后的第二年、第十年、第五十年，我都想牵着你的手，一起慢慢走，走到白头。</p>
+        <p class="signature">—— 永远爱你的我</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="effects.js"></script>
+
+  <!-- 爱心飘落与点击特效 -->
+  <script>
+    // 爱心飘落特效
+    window.addEventListener('load', function() {
+      let heartCount = 0;
+      const maxHearts = 60; 
+      const heartInterval = setInterval(function() {
+        if (heartCount >= maxHearts) { clearInterval(heartInterval); return; }
+        heartCount++;
+        var heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.style.position = 'fixed';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '-10vh';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.opacity = Math.random() * 0.6 + 0.4;
+        heart.style.transition = 'transform 3s linear, opacity 3s linear';
+        heart.style.zIndex = '-1';
+        heart.style.pointerEvents = 'none';
+        document.body.appendChild(heart);
+        setTimeout(function() {
+          heart.style.transform = 'translateY(110vh) rotate(360deg)';
+          heart.style.opacity = 0;
+        }, 50);
+        setTimeout(function() { heart.remove(); }, 3000);
+      }, 200);
+    });
+
+    // 全局点击撒星心特效
+    document.addEventListener('click', function(e) {
+      let spark = document.createElement('div');
+      spark.innerHTML = '✨'; 
+      spark.style.position = 'fixed';
+      spark.style.left = e.clientX + 'px';
+      spark.style.top = e.clientY + 'px';
+      spark.style.pointerEvents = 'none';
+      spark.style.fontSize = '20px';
+      spark.style.transition = 'all 1s ease-out';
+      spark.style.zIndex = '9999';
+      document.body.appendChild(spark);
+      setTimeout(() => {
+        spark.style.transform = `translate(${Math.random() * 100 - 50}px, -100px) scale(0)`;
+        spark.style.opacity = '0';
+      }, 10);
+      setTimeout(() => { spark.remove(); }, 1000);
+    });
+  </script>
+</body>
+</html>
